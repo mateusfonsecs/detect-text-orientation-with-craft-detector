@@ -144,14 +144,9 @@ def read(image, text_threshold = text_threshold, link_threshold= link_threshold,
 
     bboxes, polys, score_text = read_net(net, image, text_threshold = text_threshold, link_threshold= link_threshold, low_text= low_text, cuda= cuda, poly= poly, refine_net=None)
 
-    # save score text
-    filename, file_ext = os.path.splitext(os.path.basename(image_path))
-    mask_file = result_folder + "/res_" + filename + '_mask.jpg'
-    cv2.imwrite(mask_file, score_text)
-
-    file_utils.saveResult(image_path, image[:, :, ::-1], polys, dirname=result_folder)
-
     print("elapsed time : {}s".format(time.time() - t))
+
+    return polys
 
 if __name__ == '__main__':
     # load net
